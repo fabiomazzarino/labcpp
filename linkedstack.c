@@ -15,6 +15,12 @@ linkedstack linkedstack_new() {
 void linkedstack_delete(linkedstack stack) {
     if (!stack)
         return;
+    while (stack->top) {
+        free(stack->top->data);
+        node *delnode = stack->top;
+        stack->top = stack->top->prev;
+        free(delnode);
+    }
     free(stack);
 }
 
